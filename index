@@ -1,0 +1,1503 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muthia Andini - Personal Portfolio</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* ==========================================================================
+           1. CSS VARIABLES & BASE STYLES
+           ========================================================================== */
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --bg-card: #ffffff;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --text-muted: #94a3b8;
+            --accent: #7c3aed; /* Violet Accent */
+            --accent-hover: #6d28d9;
+            --accent-light: #f3e8ff;
+            --border-color: #e2e8f0;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --radius: 12px;
+        }
+
+        /* Dark Theme Mode Variables */
+        [data-theme="dark"] {
+            --bg-primary: #0b0f19;
+            --bg-secondary: #111827;
+            --bg-card: #1e293b;
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --text-muted: #64748b;
+            --accent: #8b5cf6;
+            --accent-hover: #7c3aed;
+            --accent-light: rgba(139, 92, 246, 0.15);
+            --border-color: #334155;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.4);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: var(--transition);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .section {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3.5rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.25rem;
+            position: relative;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 4px;
+            background-color: var(--accent);
+            border-radius: 2px;
+        }
+
+        .section-title p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 1px solid transparent;
+            font-size: 0.95rem;
+        }
+
+        .btn-primary {
+            background-color: var(--accent);
+            color: #ffffff;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+        }
+
+        .btn-outline {
+            border-color: var(--border-color);
+            color: var(--text-primary);
+            background-color: transparent;
+        }
+
+        .btn-outline:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        /* Badge */
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background-color: var(--accent-light);
+            color: var(--accent);
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* ==========================================================================
+           2. NAVBAR & NAVIGATION
+           ========================================================================== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        [data-theme="dark"] .navbar {
+            background-color: rgba(11, 15, 25, 0.85);
+        }
+
+        .navbar-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .nav-link {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            position: relative;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--accent);
+        }
+
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--accent);
+        }
+
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.1rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .theme-toggle:hover {
+            background-color: var(--accent-light);
+            color: var(--accent);
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.25rem;
+        }
+
+        /* ==========================================================================
+           3. HERO SECTION
+           ========================================================================== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 80px;
+            background: radial-gradient(circle at top right, var(--accent-light), transparent 40%);
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .hero-content h3 {
+            color: var(--accent);
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-content h1 {
+            font-size: 3.25rem;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        .hero-content h2 {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+            margin-bottom: 1.25rem;
+        }
+
+        .hero-content p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-socials {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background-color: var(--accent);
+            color: #ffffff;
+            border-color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .hero-image {
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+
+        .img-wrapper {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            padding: 8px;
+            background: linear-gradient(135deg, var(--accent), var(--border-color));
+            box-shadow: var(--shadow-lg);
+        }
+
+        .img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            background-color: var(--bg-card);
+        }
+
+        /* ==========================================================================
+           4. ABOUT ME
+           ========================================================================== */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            text-align: justify;
+        }
+
+        .about-highlights {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .highlight-card {
+            background-color: var(--bg-card);
+            padding: 1.25rem;
+            border-radius: var(--radius);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .highlight-card i {
+            font-size: 1.5rem;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .highlight-card h4 {
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .highlight-card p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 0;
+        }
+
+        /* ==========================================================================
+           5. EDUCATION & TIMELINE
+           ========================================================================== */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background-color: var(--border-color);
+            top: 0;
+            bottom: 0;
+            left: 20px;
+        }
+
+        .timeline-item {
+            padding: 0 0 2.5rem 50px;
+            position: relative;
+        }
+
+        .timeline-icon {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--bg-card);
+            border: 2px solid var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            z-index: 1;
+        }
+
+        .timeline-content {
+            background-color: var(--bg-card);
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .timeline-content h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .timeline-content .institution {
+            color: var(--accent);
+            font-weight: 500;
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-content .date {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .timeline-content p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* ==========================================================================
+           6. EXPERIENCE & ORGANIZATION
+           ========================================================================== */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .card {
+            background-color: var(--bg-card);
+            border-radius: var(--radius);
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            transform: translateY(-50px);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--accent);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .card-title h3 {
+            font-size: 1.1rem;
+        }
+
+        .card-subtitle {
+            color: var(--accent);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .card-date {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .card-body p, .card-body ul {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .card-body ul {
+            padding-left: 1.2rem;
+            list-style-type: disc;
+        }
+
+        .card-body li {
+            margin-bottom: 0.4rem;
+        }
+
+        /* ==========================================================================
+           7. SKILLS
+           ========================================================================== */
+        .skills-wrapper {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category {
+            background-color: var(--bg-card);
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            border: 1px solid var(--border-color);
+        }
+
+        .skill-category h3 {
+            font-size: 1.1rem;
+            margin-bottom: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--accent);
+        }
+
+        .skill-item {
+            margin-bottom: 1rem;
+        }
+
+        .skill-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.35rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .skill-bar {
+            height: 8px;
+            background-color: var(--border-color);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .skill-progress {
+            height: 100%;
+            background-color: var(--accent);
+            border-radius: 4px;
+            width: 0%; /* Dynamic with JS */
+            transition: width 1s ease-in-out;
+        }
+
+        /* ==========================================================================
+           8. PROJECTS
+           ========================================================================== */
+        .project-card {
+            background-color: var(--bg-card);
+            border-radius: var(--radius);
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .project-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-bottom: 1px solid var(--border-color);
+            background-color: var(--bg-secondary);
+        }
+
+        .project-content {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .project-content h3 {
+            font-size: 1.15rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-content p {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+            flex-grow: 1;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .project-tech span {
+            font-size: 0.75rem;
+            padding: 0.2rem 0.5rem;
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            color: var(--text-secondary);
+        }
+
+        .project-links {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .project-links .btn {
+            padding: 0.4rem 0.8rem;
+            font-size: 0.8rem;
+        }
+
+        /* ==========================================================================
+           9. CERTIFICATES & ACHIEVEMENTS
+           ========================================================================== */
+        .cert-card {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            background-color: var(--bg-card);
+            padding: 1.25rem;
+            border-radius: var(--radius);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .cert-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .cert-icon {
+            font-size: 2rem;
+            color: var(--accent);
+            background-color: var(--accent-light);
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .cert-details h4 {
+            font-size: 1rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .cert-details p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        /* ==========================================================================
+           10. CONTACT
+           ========================================================================== */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 0.8fr 1.2fr;
+            gap: 2.5rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background-color: var(--bg-card);
+            padding: 1rem;
+            border-radius: var(--radius);
+            border: 1px solid var(--border-color);
+        }
+
+        .info-item i {
+            font-size: 1.25rem;
+            color: var(--accent);
+            background-color: var(--accent-light);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .info-text h4 {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .info-text p, .info-text a {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .contact-form {
+            background-color: var(--bg-card);
+            padding: 2rem;
+            border-radius: var(--radius);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 0.4rem;
+            color: var(--text-primary);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-light);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* ==========================================================================
+           11. FOOTER & BACK TO TOP
+           ========================================================================== */
+        footer {
+            background-color: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            padding: 2.5rem 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .footer-socials {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .footer-copy {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--accent);
+            color: #ffffff;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            box-shadow: var(--shadow-md);
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 99;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-3px);
+        }
+
+        /* ==========================================================================
+           12. RESPONSIVE DESIGN (MEDIA QUERIES)
+           ========================================================================== */
+        @media (max-width: 992px) {
+            .hero-grid, .about-grid, .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                text-align: center;
+                padding-top: 100px;
+            }
+
+            .hero-content p {
+                margin: 0 auto 2rem auto;
+            }
+
+            .hero-buttons, .hero-socials {
+                justify-content: center;
+            }
+
+            .hero-image {
+                order: -1;
+                margin-bottom: 1rem;
+            }
+
+            .img-wrapper {
+                width: 220px;
+                height: 220px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background-color: var(--bg-primary);
+                flex-direction: column;
+                justify-content: flex-start;
+                padding: 2rem;
+                transition: var(--transition);
+                border-top: 1px solid var(--border-color);
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .hero-content h1 {
+                font-size: 2.25rem;
+            }
+
+            .about-highlights {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                padding: 3.5rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar">
+        <div class="container navbar-container">
+            <a href="#home" class="logo">Muthia<span>.A</span></a>
+            
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#education" class="nav-link">Education</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#organization" class="nav-link">Organization</a></li>
+                <li><a href="#certificates" class="nav-link">Certificates</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+
+            <div class="nav-controls">
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Theme">
+                    <i class="fa-solid me-2 fa-moon"></i>
+                </button>
+                <button class="hamburger" id="hamburger" aria-label="Toggle Navigation">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <h3>Hello, I'm</h3>
+                    <h1>Muthia Andini</h1>
+                    <h2>Teknik Informatika Student | Aspiring Professional</h2>
+                    <p>Mahasiswa tingkat akhir Teknik Informatika di Universitas Komputer Indonesia (UNIKOM) yang berfokus pada pengembangan aplikasi berbasis web, analisis data (Machine Learning), serta desain antarmuka pengguna (UI/UX)[cite: 1].</p>
+                    
+                    <div class="hero-buttons">
+                        <!-- REPLACE: Link ke file CV Anda -->
+                        <a href="CV_Muthia_Andini.pdf" download class="btn btn-primary">
+                            <i class="fa-solid fa-download"></i> Download CV
+                        </a>
+                        <a href="#projects" class="btn btn-outline">
+                            <i class="fa-solid fa-briefcase"></i> View My Projects
+                        </a>
+                    </div>
+
+                    <div class="hero-socials">
+                        <!-- REPLACE: URL Media Sosial Anda -->
+                        <a href="https://linkedin.com/in/muthiaandini" target="_blank" class="social-link" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="https://github.com/muthiaandini" target="_blank" class="social-link" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                        <a href="https://instagram.com/muthiaandini" target="_blank" class="social-link" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    </div>
+                </div>
+
+                <div class="hero-image">
+                    <div class="img-wrapper">
+                        <!-- REPLACE: Placeholder SVG dengan file Foto Profil Anda -->
+                        <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'><rect width='100%' height='100%' fill='%237c3aed'/><text x='50%' y='50%' font-family='sans-serif' font-size='80' fill='%23ffffff' text-anchor='middle' dy='.3em'>MA</text></svg>" alt="Muthia Andini Profile">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT ME SECTION -->
+    <section class="section" id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>About Me</h2>
+                <p>Mengenal lebih dekat latar belakang dan minat profesional saya</p>
+            </div>
+
+            <div class="about-grid">
+                <div class="about-text">
+                    <p>Saya adalah mahasiswa aktif tingkat akhir program studi Teknik Informatika di Universitas Komputer Indonesia (UNIKOM)[cite: 1]. Berlokasi di Bandung, saya memiliki ketertarikan mendalam pada teknologi, sistem informasi, pengolahan data, dan pengembangan solusi berbasis perangkat lunak[cite: 1].</p>
+                    <p>Memiliki pengalaman akademis dan organisasi yang kuat, termasuk kepemimpinan sebagai Menteri Sosial BEM UNIKOM[cite: 1]. Terbiasa menganalisis masalah teknis, mengelola basis data, dan mengimplementasikan algoritma Machine Learning untuk menghasilkan wawasan yang bernilai bisnis[cite: 1].</p>
+                </div>
+
+                <div class="about-highlights">
+                    <div class="highlight-card">
+                        <i class="fa-solid fa-laptop-code"></i>
+                        <h4>Pengembangan Web</h4>
+                        <p>Pemrograman Python, Java, HTML, CSS, & Web App Development[cite: 1]</p>
+                    </div>
+                    <div class="highlight-card">
+                        <i class="fa-solid fa-chart-line"></i>
+                        <h4>Data & Machine Learning</h4>
+                        <p>Analisis data, pemodelan prediktif, & visualisasi data[cite: 1]</p>
+                    </div>
+                    <div class="highlight-card">
+                        <i class="fa-solid fa-database"></i>
+                        <h4>Database & SQL</h4>
+                        <p>Manajemen basis data & pemrosesan query[cite: 1]</p>
+                    </div>
+                    <div class="highlight-card">
+                        <i class="fa-solid fa-users"></i>
+                        <h4>Kepemimpinan</h4>
+                        <p>Pengalaman manajerial tim & organisasi mahasiswa[cite: 1]</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EDUCATION SECTION -->
+    <section class="section" style="background-color: var(--bg-secondary);" id="education">
+        <div class="container">
+            <div class="section-title">
+                <h2>Education</h2>
+                <p>Riwayat Pendidikan Formal</p>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-icon">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>S1 Teknik Informatika</h3>
+                        <div class="institution">Universitas Komputer Indonesia (UNIKOM), Bandung[cite: 1]</div>
+                        <div class="date"><i class="fa-regular fa-calendar"></i> 2023 - Sekarang (Mahasiswa Tingkat Akhir)[cite: 1]</div>
+                        <p>Fokus studi meliputi rekayasa perangkat lunak, sistem basis data, algoritma machine learning, dan manajemen proyek TI[cite: 1]. Aktif dalam organisasi kemahasiswaan[cite: 1].</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-icon">
+                        <i class="fa-solid fa-school"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>SMA / SMK</h3>
+                        <!-- REPLACE: Isi data SMA/SMK Anda -->
+                        <div class="institution">Nama Sekolah Menengah</div>
+                        <div class="date"><i class="fa-regular fa-calendar"></i> Tahun Masuk - Tahun Lulus</div>
+                        <p>Jurusan IPA / Teknik Komputer dan Jaringan / Rekayasa Perangkat Lunak.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SKILLS SECTION -->
+    <section class="section" id="skills">
+        <div class="container">
+            <div class="section-title">
+                <h2>Skills & Competencies</h2>
+                <p>Keahlian Teknis dan Soft Skills</p>
+            </div>
+
+            <div class="skills-wrapper">
+                <!-- Technical Skills -->
+                <div class="skill-category">
+                    <h3><i class="fa-solid fa-code"></i> Programming & Web</h3>
+                    <div class="skill-item">
+                        <div class="skill-info"><span>Python</span><span>85%</span></div>
+                        <div class="skill-bar"><div class="skill-progress" data-progress="85%"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info"><span>HTML & CSS</span><span>80%</span></div>
+                        <div class="skill-bar"><div class="skill-progress" data-progress="80%"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info"><span>Java</span><span>75%</span></div>
+                        <div class="skill-bar"><div class="skill-progress" data-progress="75%"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info"><span>SQL / Database</span><span>80%</span></div>
+                        <div class="skill-bar"><div class="skill-progress" data-progress="80%"></div></div>
+                    </div>
+                </div>
+
+                <!-- Data & Analytics -->
+                <div class="skill-category">
+                    <h3><i class="fa-solid fa-chart-pie"></i> Data & Systems</h3>
+                    <div class="skill-item">
+                        <div class="skill-info"><span>Data Analysis & Visualization</span><span>85%</span></div>
+                        <div class="skill-bar"><div class="skill-progress" data-progress="85%"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info"><span>Machine Learning Basics</span><span>75%</span></div>
+                        <div class="skill-bar"><div class="skill-progress" data-progress="75%"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info"><span>System Analysis & UI/UX</span><span>70%</span></div>
+                        <div class="skill-bar"><div class="skill-progress" data-progress="70%"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info"><span>Microsoft Office Suite</span><span>90%</span></div>
+                        <div class="skill-bar"><div class="skill-progress" data-progress="90%"></div></div>
+                    </div>
+                </div>
+
+                <!-- Soft Skills -->
+                <div class="skill-category">
+                    <h3><i class="fa-solid fa-user-check"></i> Soft Skills</h3>
+                    <div class="skill-item">
+                        <div class="skill-info"><span>Leadership & Teamwork</span><span>90%</span></div>
+                        <div class="skill-bar"><div class="skill-progress" data-progress="90%"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info"><span>Problem Solving & Logic</span><span>85%</span></div>
+                        <div class="skill-bar"><div class="skill-progress" data-progress="85%"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info"><span>Communication</span><span>85%</span></div>
+                        <div class="skill-bar"><div class="skill-progress" data-progress="85%"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info"><span>Time Management</span><span>80%</span></div>
+                        <div class="skill-bar"><div class="skill-progress" data-progress="80%"></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJECTS SECTION -->
+    <section class="section" style="background-color: var(--bg-secondary);" id="projects">
+        <div class="container">
+            <div class="section-title">
+                <h2>Featured Projects</h2>
+                <p>Portofolio Proyek Akademik & Mandiri</p>
+            </div>
+
+            <div class="cards-grid">
+                <!-- Project 1 -->
+                <div class="project-card">
+                    <!-- REPLACE: Ganti SVG placeholder dengan gambar asli project -->
+                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='200' viewBox='0 0 400 200'><rect width='100%' height='100%' fill='%231e293b'/><text x='50%' y='50%' font-family='sans-serif' font-size='20' fill='%23cbd5e1' text-anchor='middle'>Research: Air Quality</text></svg>" alt="Research Project" class="project-img">
+                    <div class="project-content">
+                        <h3>Penelitian Kualitas Udara (Machine Learning)</h3>
+                        <p>Menganalisis dataset nasional kualitas udara menggunakan teknik machine learning, preprocessing data, seleksi fitur, dan pemodelan prediktif[cite: 1].</p>
+                        <div class="project-tech">
+                            <span>Python</span>
+                            <span>Machine Learning</span>
+                            <span>Data Analysis</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="btn btn-outline"><i class="fa-solid fa-arrow-up-right-from-square"></i> Details</a>
+                            <a href="#" class="btn btn-outline"><i class="fa-brands fa-github"></i> Code</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-card">
+                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='200' viewBox='0 0 400 200'><rect width='100%' height='100%' fill='%231e293b'/><text x='50%' y='50%' font-family='sans-serif' font-size='20' fill='%23cbd5e1' text-anchor='middle'>Fashion Marketplace</text></svg>" alt="Marketplace Project" class="project-img">
+                    <div class="project-content">
+                        <h3>Aplikasi Marketplace Fashion Bandung</h3>
+                        <p>Pengembangan aplikasi marketplace lokal mencakup fitur katalog produk, keranjang belanja, dan manajemen pesanan berbasis web/desktop[cite: 1].</p>
+                        <div class="project-tech">
+                            <span>Python</span>
+                            <span>Java</span>
+                            <span>SQL</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="btn btn-outline"><i class="fa-solid fa-arrow-up-right-from-square"></i> Details</a>
+                            <a href="#" class="btn btn-outline"><i class="fa-brands fa-github"></i> Code</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-card">
+                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='200' viewBox='0 0 400 200'><rect width='100%' height='100%' fill='%231e293b'/><text x='50%' y='50%' font-family='sans-serif' font-size='20' fill='%23cbd5e1' text-anchor='middle'>Website Pelaporan</text></svg>" alt="Environment Web" class="project-img">
+                    <div class="project-content">
+                        <h3>Website Pelaporan Lingkungan</h3>
+                        <p>Platform website untuk pelaporan isu lingkungan oleh masyarakat dengan perancangan antarmuka yang intuitif dan pengolahan data terstruktur[cite: 1].</p>
+                        <div class="project-tech">
+                            <span>HTML/CSS</span>
+                            <span>Python</span>
+                            <span>UI/UX</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="btn btn-outline"><i class="fa-solid fa-arrow-up-right-from-square"></i> Details</a>
+                            <a href="#" class="btn btn-outline"><i class="fa-brands fa-github"></i> Code</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ORGANIZATION SECTION -->
+    <section class="section" id="organization">
+        <div class="container">
+            <div class="section-title">
+                <h2>Organization & Leadership</h2>
+                <p>Pengalaman Pengabdian dan Organisasi</p>
+            </div>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <h3>Menteri Sosial</h3>
+                            <div class="card-subtitle">Badan Eksekutif Mahasiswa (BEM UNIKOM)[cite: 1]</div>
+                        </div>
+                    </div>
+                    <div class="card-date"><i class="fa-regular fa-calendar"></i> 2024 - 2025[cite: 1]</div>
+                    <div class="card-body">
+                        <ul>
+                            <li>Memimpin pelaksanaan program pengabdian masyarakat[cite: 1].</li>
+                            <li>Mengordinasikan kegiatan donasi dan bakti sosial masyarakat[cite: 1].</li>
+                            <li>Menginisiasi program PKM BEM Berdampak berbasis AI[cite: 1].</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <h3>Anggota BEM</h3>
+                            <div class="card-subtitle">Badan Eksekutif Mahasiswa (BEM UNIKOM)[cite: 1]</div>
+                        </div>
+                    </div>
+                    <div class="card-date"><i class="fa-regular fa-calendar"></i> 2023 - 2024[cite: 1]</div>
+                    <div class="card-body">
+                        <ul>
+                            <li>Berpartisipasi aktif dalam operasional kegiatan kampus dan sosial[cite: 1].</li>
+                            <li>Mendukung eksekusi program kerja lintas divisi internal BEM[cite: 1].</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CERTIFICATES SECTION -->
+    <section class="section" style="background-color: var(--bg-secondary);" id="certificates">
+        <div class="container">
+            <div class="section-title">
+                <h2>Certificates & Achievements</h2>
+                <p>Sertifikasi & Pelatihan</p>
+            </div>
+
+            <div class="cards-grid">
+                <div class="cert-card">
+                    <div class="cert-icon">
+                        <i class="fa-solid fa-certificate"></i>
+                    </div>
+                    <div class="cert-details">
+                        <h4>Sertifikat Kompetensi Machine Learning</h4>
+                        <p>Penyelenggara Lembaga / Platform • 2025</p>
+                        <a href="#" class="btn btn-outline" style="padding: 0.25rem 0.6rem; font-size: 0.75rem;"><i class="fa-solid fa-eye"></i> View Certificate</a>
+                    </div>
+                </div>
+
+                <div class="cert-card">
+                    <div class="cert-icon">
+                        <i class="fa-solid fa-award"></i>
+                    </div>
+                    <div class="cert-details">
+                        <h4>Sertifikasi Web Development</h4>
+                        <p>Penyelenggara Lembaga / Platform • 2024</p>
+                        <a href="#" class="btn btn-outline" style="padding: 0.25rem 0.6rem; font-size: 0.75rem;"><i class="fa-solid fa-eye"></i> View Certificate</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section class="section" id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Let's Work Together</h2>
+                <p>Hubungi Saya Untuk Peluang Kerja, Internship, atau Kolaborasi Project</p>
+            </div>
+
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <div class="info-item">
+                        <i class="fa-solid fa-envelope"></i>
+                        <div class="info-text">
+                            <h4>Email</h4>
+                            <!-- REPLACE: Email Anda -->
+                            <p><a href="mailto:muthiaandini117@gmail.com">muthiaandini117@gmail.com</a></p>[cite: 1]
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <i class="fa-solid fa-phone"></i>
+                        <div class="info-text">
+                            <h4>WhatsApp</h4>
+                            <!-- REPLACE: No Telp/WA Anda -->
+                            <p><a href="https://wa.me/6288270987096" target="_blank">+62 882-7098-7096</a></p>[cite: 1]
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <div class="info-text">
+                            <h4>Lokasi</h4>
+                            <p>Dago, Coblong, Bandung, Jawa Barat</p>[cite: 1]
+                        </div>
+                    </div>
+                </div>
+
+                <form class="contact-form" id="whatsapp-form">
+                    <div class="form-group">
+                        <label for="name">Nama Lengkap</label>
+                        <input type="text" id="name" class="form-control" placeholder="Masukkan nama Anda" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" class="form-control" placeholder="nama@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Pesan / Penawaran Kerja</label>
+                        <textarea id="message" class="form-control" placeholder="Tuliskan pesan Anda di sini..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">
+                        <i class="fa-brands fa-whatsapp"></i> Send via WhatsApp
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container footer-content">
+            <a href="#home" class="logo">Muthia<span>.A</span></a>
+            <div class="footer-socials">
+                <a href="https://linkedin.com/in/muthiaandini" target="_blank" class="social-link"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="https://github.com/muthiaandini" target="_blank" class="social-link"><i class="fa-brands fa-github"></i></a>
+                <a href="https://instagram.com/muthiaandini" target="_blank" class="social-link"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+            <p class="footer-copy">&copy; 2026 Muthia Andini. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- BACK TO TOP BUTTON -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to Top">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // --- 1. Theme Switcher (Dark/Light Mode) ---
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeIcon = themeToggleBtn.querySelector('i');
+
+        // Check Local Storage or System Preference
+        const currentTheme = localStorage.getItem('theme') || 
+            (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+
+        if (currentTheme === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            themeIcon.classList.replace('fa-moon', 'fa-sun');
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            let theme = document.documentElement.getAttribute('data-theme');
+            if (theme === 'dark') {
+                document.documentElement.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'light');
+                themeIcon.classList.replace('fa-sun', 'fa-moon');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+                themeIcon.classList.replace('fa-moon', 'fa-sun');
+            }
+        });
+
+        // --- 2. Mobile Menu Navigation ---
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            hamburger.querySelector('i').classList.toggle('fa-bars');
+            hamburger.querySelector('i').classList.toggle('fa-xmark');
+        });
+
+        // Close menu on link click
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                if(hamburger.querySelector('i').classList.contains('fa-xmark')) {
+                    hamburger.querySelector('i').classList.replace('fa-xmark', 'fa-bars');
+                }
+            });
+        });
+
+        // --- 3. Scroll Active Link & Back to Top Button ---
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const backToTopBtn = document.getElementById('backToTop');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            
+            // Show/Hide Back to top button
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+
+            // Scroll Active Link Detection
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= (sectionTop - 150)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // --- 4. Dynamic Skill Bar Animation on Scroll ---
+        const skillBars = document.querySelectorAll('.skill-progress');
+        let animated = false;
+
+        function animateSkills() {
+            const skillsSection = document.getElementById('skills');
+            const sectionPos = skillsSection.getBoundingClientRect().top;
+            const screenPos = window.innerHeight / 1.2;
+
+            if (sectionPos < screenPos && !animated) {
+                skillBars.forEach(bar => {
+                    const progress = bar.getAttribute('data-progress');
+                    bar.style.width = progress;
+                });
+                animated = true;
+            }
+        }
+
+        window.addEventListener('scroll', animateSkills);
+
+        // --- 5. WhatsApp Form Integration ---
+        document.getElementById('whatsapp-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            
+            // Input values
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            
+            // REPLACE: Nomor WhatsApp Tujuan dalam format internasional (tanpa karakter + / -)
+            const phoneNumber = "6288270987096";
+
+            // Format WhatsApp Message
+            const waMessage = `Halo Muthia, nama saya ${name} (${email}).%0A%0A${encodeURIComponent(message)}`;
+            
+            // Redirect URL
+            window.open(`https://wa.me/${phoneNumber}?text=${waMessage}`, '_blank');
+        });
+    </script>
+</body>
+</html>
